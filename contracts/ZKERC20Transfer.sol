@@ -44,7 +44,6 @@ contract zkERC20Transfer is
         /// @notice Enter function to send ETH
     function zkTransfer(
         Proof memory proof,
-        uint[2] memory input,
         address to,
         uint256 value
     )public
@@ -52,13 +51,7 @@ contract zkERC20Transfer is
         whenNotPaused
     {
         // Verify the proof using the verification keys and the inputs
-        require(verifyTx(proof, input), "Must be at least 18 years old");
+        require(verifyTx(proof), "Must be at least 18 years old");
         erc20Contract.safeTransfer(to, value);
     }
-    
-    function userTransferApproval(Proof memory proof, uint[2] memory input) public view returns (bool) 
-    {
-        return (verifyTx(proof, input));
-    }
-
 }
