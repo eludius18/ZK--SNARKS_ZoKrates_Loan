@@ -1,4 +1,10 @@
 # Bank Transfer zkSNARKs ZoKrates
+## Install Dependencies
+
+```shell
+npm install
+```
+
 ## Build ZoKrates
 
 ```shell
@@ -7,6 +13,7 @@ cd ZoKrates
 export ZOKRATES_STDLIB=$PWD/zokrates_stdlib/stdlib
 cargo +nightly build --release
 ```
+
 ## Creates zkBank.code
 
 ```shell
