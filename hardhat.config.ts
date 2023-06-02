@@ -74,13 +74,16 @@ const config: HardhatUserConfig = {
     localhost: {
       url: "http://127.0.0.1:8545"
     },
-    besu: {
-      url: "http://127.0.0.1:8545",
-      chainId: 1337,
-    },
     goerli: {
-      url: process.env.GOERLI_TESTNET_URL,
+      url: `https://goerli.infura.io/v3/${process.env.INFURA_PROJECT_KEY}`,
       chainId: 5,
+      accounts: [`0x${process.env.DEPLOYER_PRIVATE_KEY1}`],
+    },
+    mumbai: {
+      url: process.env.MUMBAI_TESTNET_URL,
+      chainId: 80001,
+      gas: 2100000,
+      gasPrice: 12000000000,
       accounts: [`0x${process.env.DEPLOYER_PRIVATE_KEY1}`],
     },
     bscTestnet: {
@@ -103,6 +106,7 @@ const config: HardhatUserConfig = {
       bscTestnet: "QA91H8CYJHDEWTZDV7CQGI2I7YQBCQZ4K1",
       bsc: "W6M4YY17TYS7HKQKA89QUTP5NGVAA4EKXS",
       goerli: "SZ64QT2TDYZ1UXNFST97U6NHJBV4K7835N",
+      polygonMumbai: "BD4S9VCEM7YZ4CMKTCDG1HE6M32V9EZ92E",
     }
   },
   gasReporter: {

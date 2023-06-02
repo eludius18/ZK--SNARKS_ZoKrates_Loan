@@ -10,6 +10,7 @@ npm install
 ```shell
 git clone git@github.com:Zokrates/ZoKrates.git
 cd ZoKrates
+npm i
 export ZOKRATES_STDLIB=$PWD/zokrates_stdlib/stdlib
 cargo +nightly build --release
 ```
@@ -24,8 +25,10 @@ cd code && touch zkBank.code
 
 ## zkBank.code
 ```shell
-def main(private field amountToTransfer) {
-    assert(amountToTransfer >= 100, "amount is less than 100");
+def main(private field debtToIR, private field incomeRatio, private field Age) {
+    assert(debtToIR >= 700, "Debt-to-Income Ratio must be above 700");
+    assert(incomeRatio >= 36, "Income Ratio must be above 36%");
+    assert(Age >= 18, "You must be at least 18 years old");
 }
 ```
 
@@ -40,11 +43,21 @@ cd ZoKrates/target/release
 ./zokrates export-verifier
 ```
 
-## Set Proof.json in tuple
+## Compute Witness 
+
+debtToIR = 700
+incomeRatio = 38
+Age = 21
 
 ```shell
-[["0x2d6c3f4c6301b129bcd912ece230ed77f0bbff6c19712bc743252079c1751851","0x1ee0a2eb1fba458af5eeb5d20c7245171aa464975e982c665a4e150568760f0e"],[["0x1ce3c990ebde26fef517f78069450702cbe5ccb8ba838dc7d5d55c0a89047eb8","0x1b928d7814d6094831ef7eae0c27f3e2735c97dd5f817a557bf1700778828fee"],["0x02dcf617e9b0784e58eb50d3de843cd2eceefe02a56a1a0549e28e3b54c31c3a","0x1d285f8e2059bdb3f32d01e757d93dd5adb002d3dff928acad8060ce76c59da7"]],["0x1f08dd63073709becc285a046fb82925e5a0cf61f171709f2ed5cee7a69ddded","0x08b17e3a733d435682bace1472eef9875f47b678f4de21e552d968fc4dd8b3a1"]]
+./zokrates compute-witness -a 700 38 21
+./zokrates generate-proof
 ```
+
+```shell
+[["0x230aa99c4ff7ee82c3ede7e344533f745393e57c6e6cf7fe5f43f3395458e736","0x15b108a55493d3b8498620d27948a7c420f5bc404341689b7c93fbcc1ff21b0e"],[["0x09b10634a5d936dfa744bd0d00bbce1dfc1b7778793456f0b1840f5989d761a9","0x141a09eec51719e17ee06f2a806f0de673c1bee7c56ebbae30dadbe08988a9b3"],["0x24f28baa0291a5e29f0999c28e32a10753b2aeb1cfe1f5edfa82e9a691a04b4b","0x170f13c6126f76630e16e419d2d0a59975a0715c28d54c77f0cd203abecefb33"]],["0x29870e69d5c6ba62d71c849e227ed0a19e047aa4a1eba3e39b97c53cc0c8aa6c","0x1a863e0c89ac4491bdf6dcde8ce857d586d8ca39db11026269828b51eed09df1"]]
+```
+
 ## Create new Proofs using new Witness values
 
 ```shell
@@ -61,5 +74,5 @@ npx hardhat deploy --network <blockchain-network> --tags TokenERC20
 ## Deploy zkERC20Transfer Smart Contract
 
 ```shell
-npx hardhat deploy --network <blockchain-network> --tags zkERC20Transfer
+npx hardhat deploy --network <blockchain-network> --tags zkERC20Loan
 ```

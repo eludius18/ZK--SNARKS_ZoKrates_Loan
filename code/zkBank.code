@@ -1,3 +1,5 @@
-def main(private field amountToTransfer) {
-    assert(amountToTransfer >= 100, "amount is less than 100");
+def main(private field debtToIR, private field incomeRatio, private field Age) {
+    assert(debtToIR >= 700, "Debt-to-Income Ratio must be above 700");
+    assert(incomeRatio >= 36, "Income Ratio must be above 36%");
+    assert(Age >= 18, "You must be at least 18 years old");
 }

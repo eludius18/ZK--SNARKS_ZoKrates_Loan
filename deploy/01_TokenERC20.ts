@@ -12,7 +12,7 @@ const deploy: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployer } = await getNamedAccounts();
   const { deploy } = deployments;
 
-const _tokenName = "Eludius18 Token";
+const _tokenName = "Token";
 const _tokenSymbol = "ETR";
 
   const tokenerc20 = await deploy("TokenERC20", {
@@ -39,10 +39,10 @@ const _tokenSymbol = "ETR";
   const tokenerc20Impl = await deployments.get("TokenERC20_Implementation");
   
   
-/*   await run("verify:verify", {
+  await run("verify:verify", {
     address: tokenerc20Impl.address,
     contract: "contracts/TokenERC20.sol:TokenERC20",
-  }); */
+  });
   
 };
 
